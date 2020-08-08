@@ -1,0 +1,22 @@
+{
+  "name": "geopin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --ignore client/ server.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.16.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "google-auth-library": "^6.0.6",
+    "graphql": "^15.3.0",
+    "mongoose": "^5.9.28",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
