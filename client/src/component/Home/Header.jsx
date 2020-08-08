@@ -10,7 +10,7 @@ import Signout from "../Auth/Signout";
 const Header = ({ classes }) => {
   const { state } = useContext(context);
   const { currentUser } = state;
-  console.log(currentUser);
+  //console.log(currentUser);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -25,10 +25,16 @@ const Header = ({ classes }) => {
           {currentUser && (
             <div className={classes.grow}>
               <img
+                id="avt"
                 className={classes.picture}
                 alt={currentUser.name}
                 src={currentUser.picture}
-                onerror="this.src='https://iconscout.com/icon/avatar-370';this.onerror='';"
+                onError={
+                  document.getElementById("avt")
+                    ? (document.getElementById("avt").src =
+                        "https://iconscout.com/icon/avatar-370")
+                    : null
+                }
               />
               <Typography variant="h5" color="inherit" noWrap>
                 {currentUser.name}
