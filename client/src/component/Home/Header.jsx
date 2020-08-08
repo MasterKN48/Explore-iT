@@ -29,12 +29,6 @@ const Header = ({ classes }) => {
                 className={classes.picture}
                 alt={currentUser.name}
                 src={currentUser.picture}
-                onError={
-                  document.getElementById("avt")
-                    ? (document.getElementById("avt").src =
-                        "https://iconscout.com/icon/avatar-370")
-                    : null
-                }
               />
               <Typography variant="h5" color="inherit" noWrap>
                 {currentUser.name}
