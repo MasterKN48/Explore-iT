@@ -37,14 +37,36 @@ if (process.env.NODE_ENV === "dev") {
     })
   );
 }
+const { findeOrCreateUser } = require("./controllers/user");
 
 //! GraphQL Setup
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolver");
 
+const authentication = async (req) => {
+  let authToken = null;
+  let currentUser = null;
+  try {
+    authToken = req.headers.authorization;
+    if (authToken) {
+      //find user in DB
+      currentUser = await findeOrCreateUser(authToken);
+      // or create User
+      //console.log(currentUser);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("Unable to authenticate user with token");
+  }
+  return currentUser;
+};
+
 const server = new ApolloServer({
   typeDefs: typeDefs,
   resolvers: resolvers,
+  context: ({ req }) => ({
+    currentUser: authentication(req),
+  }),
 });
 server.applyMiddleware({ app });
 //!----
