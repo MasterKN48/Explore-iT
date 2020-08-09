@@ -4,20 +4,31 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#9c27b0" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Explore-iT: Map Based Real Time Micro Blogging App"
     />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>GeoPins</title>
+    <title>Explore-iT : Map Based Real Time Micro Blogging App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
-      console.warn = () => {};
+      console.log(
+        "%c MasterKN",
+        "font-weight: bold; font-size: 40px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)"
+      );
+      if (window.location.hostname !== "localhost") {
+        // production Env
+        console.warn = () => {};
+        console.log = () => {};
+        console.error = () => {};
+      }
     </script>
   </body>
 </html>

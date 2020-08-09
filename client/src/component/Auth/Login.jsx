@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { GraphQLClient } from "graphql-request";
 import { ME_QUERY } from "../../graphql/queries";
 import context from "../../context";
+import AppLogo from "../../assets/app.png";
 
 const styles = {
   root: {
@@ -45,14 +46,18 @@ const Login = ({ classes }) => {
     <Redirect to="/" />
   ) : (
     <div className={classes.root}>
+      <img src={AppLogo} alt="logo-bar" style={{ height: "84px" }} />
       <Typography
         component="h1"
-        variant="h3"
+        variant="h4"
         noWrap
         gutterBottom
         style={{ color: "rgb(66, 143, 244)" }}
       >
-        Welcome
+        Welcome to Explore-iT
+      </Typography>
+      <Typography variant="subtitle2" gutterBottom>
+        Map Based Real Time Micro Blogging App
       </Typography>
       <GoogleLogin
         onFailure={onFailure}

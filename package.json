@@ -1,11 +1,14 @@
 {
-  "name": "geopin",
+  "name": "explore_it",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --ignore client/ server.js"
+  },
+  "repository": {
+    "url": "https://github.com/MasterKN48/Explore-iT"
   },
   "dependencies": {
     "apollo-server-express": "^2.16.1",

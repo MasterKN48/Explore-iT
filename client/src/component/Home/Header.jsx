@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MapIcon from "@material-ui/icons/Map";
 import Typography from "@material-ui/core/Typography";
 import context from "../../context";
 import { useMediaQuery } from "@material-ui/core";
 import Signout from "../Auth/Signout";
+import AppLogo from "../../assets/app.png";
 
 const Header = ({ classes }) => {
   const { state } = useContext(context);
@@ -18,7 +18,7 @@ const Header = ({ classes }) => {
       <AppBar position="static">
         <Toolbar>
           <div className={classes.grow}>
-            <MapIcon className={classes.icon}></MapIcon>
+            <img src={AppLogo} className={classes.icon} alt="logo-bar" />
             <Typography
               className={mobileSize ? classes.mobile : ""}
               component="h1"
@@ -26,7 +26,7 @@ const Header = ({ classes }) => {
               color="inherit"
               noWrap
             >
-              GeoPins
+              Explore-iT
             </Typography>
           </div>
 
@@ -67,8 +67,7 @@ const styles = (theme) => ({
   },
   icon: {
     marginRight: theme.spacing(1),
-    color: "green",
-    fontSize: 45,
+    height: "60px",
   },
   mobile: {
     display: "none",
