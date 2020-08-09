@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import { useMediaQuery } from "@material-ui/core";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhotoTwoTone";
 import LandscapeIcon from "@material-ui/icons/LandscapeOutlined";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -19,6 +20,7 @@ const CreatePin = ({ classes }) => {
   const [content, setContent] = useState("");
   const [submiting, setSubmiting] = useState(false);
   const { state, dispatch } = useContext(context);
+  const mobileSize = useMediaQuery(`(max-width:650px)`);
 
   const handleImageUpload = async () => {
     const data = new FormData();
@@ -99,7 +101,7 @@ const CreatePin = ({ classes }) => {
           name="content"
           label="Content"
           multiline
-          rows="6"
+          rows={mobileSize ? "3" : "6"}
           margin="normal"
           fullWidth
           variant="outlined"

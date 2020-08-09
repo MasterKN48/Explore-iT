@@ -7,6 +7,7 @@ import ReactMapGL, {
   GeolocateControl,
   Marker,
 } from "react-map-gl";
+import { useMediaQuery } from "@material-ui/core";
 import PinIcon from "./PinIcon";
 import context from "../../context";
 import Blog from "./Blog";
@@ -63,6 +64,7 @@ const Map = ({ classes }) => {
   });
 
   const client = useClient();
+  const mobileSize = useMediaQuery(`(max-width:650px)`);
 
   const { state, dispatch } = useContext(context);
 
@@ -102,6 +104,16 @@ const Map = ({ classes }) => {
   }, []);
 
   const [popup, setPopUp] = useState(null);
+
+  //remove popup is pin deleted
+  useEffect(() => {
+    const pinExist =
+      popup && state.pins.findIndex((pin) => pin._id === popup._id) > -1;
+    if (!pinExist) {
+      setPopUp(null);
+    }
+  }, [state.pins.length]);
+
   const getUserPosition = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -145,7 +157,7 @@ const Map = ({ classes }) => {
   const isAuthUser = () => state.currentUser._id === popup.author._id;
   return (
     <div>
-      <div className={classes.root}>
+      <div className={mobileSize ? classes.rootMobile : classes.root}>
         <ReactMapGL
           {...viewport}
           width="100vw"
