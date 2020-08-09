@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const http = require("http");
 const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -46,30 +47,44 @@ const resolvers = require("./resolver");
 const server = new ApolloServer({
   typeDefs: typeDefs,
   resolvers: resolvers,
-  context: async ({ req }) => {
+  context: async ({ req, connection }) => {
     let authToken = null;
     let currentUser = null;
-    try {
-      authToken = req.headers.authorization;
-      if (authToken) {
-        //find user in DB
-        currentUser = await findeOrCreateUser(authToken);
-        // or create User
+    if (connection) {
+      return connection.context;
+    } else {
+      try {
+        authToken = req.headers.authorization;
+        if (authToken) {
+          //find user in DB
+          currentUser = await findeOrCreateUser(authToken);
+          // or create User
+        }
+      } catch (error) {
+        console.log(error);
+        console.log("Unable to authenticate user with token");
       }
-    } catch (error) {
-      console.log(error);
-      console.log("Unable to authenticate user with token");
+      return { currentUser };
     }
-    return { currentUser };
   },
 });
-server.applyMiddleware({ app, path: "/api/graphql" });
+server.applyMiddleware({
+  app,
+  path: "/api/graphql",
+});
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 //!----
 
 app.get("/", (req, res) => {
   return res.send("Hello");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server started on ${process.env.PORT}`);
+httpServer.listen(process.env.PORT, () => {
+  console.log(
+    `🚀 Server ready at http://localhost:${process.env.PORT}${server.graphqlPath}`
+  );
+  console.log(
+    `🚀 Subscriptions ready at ws://localhost:${process.env.PORT}${server.subscriptionsPath}`
+  );
 });

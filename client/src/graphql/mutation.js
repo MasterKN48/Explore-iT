@@ -11,6 +11,7 @@ export const CREATE_PIN_MUTATION = `
             createdAt
             title
             content
+            image
             latitude
             longitude
             author {
@@ -38,6 +39,7 @@ export const CREATE_COMMENT_MUTATION = `
             createdAt
             title
             content
+            image
             latitude
             longitude
             author {
@@ -50,6 +52,7 @@ export const CREATE_COMMENT_MUTATION = `
                 text
                 createdAt
                 author{
+                    _id
                     name
                     picture
                 }

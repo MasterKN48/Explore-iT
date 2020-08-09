@@ -43,6 +43,7 @@ export default function reducer(state, { type, payload }) {
     case "CREATE_PIN":
       const newPin = payload;
       const prevPins = state.pins.filter((pin) => pin._id !== newPin._id);
+      console.log(prevPins, newPin);
       return {
         ...state,
         pins: [...prevPins, newPin],
@@ -67,6 +68,7 @@ export default function reducer(state, { type, payload }) {
       let tmp2 = state.pins.map((pin) =>
         pin._id === updatedPin._id ? updatedPin : pin
       );
+      console.log(updatedPin, tmp2);
       return {
         ...state,
         pins: tmp2,

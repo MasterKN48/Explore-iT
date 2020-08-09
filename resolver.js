@@ -1,5 +1,10 @@
-const { AuthenticationError } = require("apollo-server-express");
+const { AuthenticationError, PubSub } = require("apollo-server-express");
 const Pin = require("./models/Pin");
+
+const pubSub = new PubSub();
+const PIN_ADDED = "PIN_ADDED";
+const PIN_DELETED = "PIN_DELETED";
+const PIN_UPDATED = "PIN_UPDATED";
 
 const authenticated = (next) => (root, args, ctx, info) => {
   //console.log(ctx.currentUser);
@@ -21,17 +26,19 @@ module.exports = {
   },
   Mutation: {
     createPin: authenticated(async (root, args, ctx, _) => {
-      console.log(ctx.currentUser._id);
+      //console.log(ctx.currentUser._id);
       const newPin = await new Pin({
         ...args.input,
         author: ctx.currentUser._id,
       }).save();
       const pinAdded = await Pin.populate(newPin, "author");
+      pubSub.publish(PIN_ADDED, { pinAdded });
       return pinAdded;
     }),
     deletePin: authenticated(async (r, a, ctx) => {
-      const pinDelete = await Pin.findOneAndDelete({ _id: a.pinId }).exec();
-      return pinDelete;
+      const pinDeleted = await Pin.findOneAndDelete({ _id: a.pinId }).exec();
+      pubSub.publish(PIN_DELETED, { pinDeleted });
+      return pinDeleted;
     }),
     createComment: authenticated(async (r, a, ctx) => {
       const newComment = { text: a.text, author: ctx.currentUser._id };
@@ -42,7 +49,19 @@ module.exports = {
       )
         .populate("author")
         .populate("comments.author");
+      pubSub.publish(PIN_UPDATED, { pinUpdated });
       return pinUpdated;
     }),
+  },
+  Subscription: {
+    pinAdded: {
+      subscribe: () => pubSub.asyncIterator(PIN_ADDED),
+    },
+    pinUpdated: {
+      subscribe: () => pubSub.asyncIterator(PIN_UPDATED),
+    },
+    pinDeleted: {
+      subscribe: () => pubSub.asyncIterator(PIN_DELETED),
+    },
   },
 };

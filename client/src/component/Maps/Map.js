@@ -18,6 +18,12 @@ import { differenceInMinutes } from "date-fns";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
+import { useSubscription } from "@apollo/client";
+import {
+  PIN_ADDED_SUBSCRIPTION,
+  PIN_DELETED_SUBSCRIPTION,
+  PIN_UPDATED_SUBSCRIPTION,
+} from "../../graphql/subscription";
 
 const TOKEN =
   "pk.eyJ1IjoicmFqZXNoc2l0aSIsImEiOiJja2RsdjYwOWsxMjd5MzNzOG85cXJidHl0In0.MfdbVSghtrLU7vsgPY5m6A";
@@ -48,6 +54,7 @@ const scaleControlStyle = {
   left: 0,
   padding: "10px",
 };
+
 const Map = ({ classes }) => {
   const [viewport, setViewport] = useState({
     latitude: 28.7041,
@@ -60,6 +67,31 @@ const Map = ({ classes }) => {
   const { state, dispatch } = useContext(context);
 
   const [userPosition, setUserPosition] = useState(null);
+
+  const { data: dataA, loading: loadingA } = useSubscription(
+    PIN_ADDED_SUBSCRIPTION
+  );
+  const { data: dataU, loading: loadingU } = useSubscription(
+    PIN_UPDATED_SUBSCRIPTION
+  );
+  const { data: dataD, loading: loadingD } = useSubscription(
+    PIN_DELETED_SUBSCRIPTION
+  );
+
+  useEffect(() => {
+    if (loadingA !== true && dataA !== undefined) {
+      console.log(dataA);
+      dispatch({ type: "CREATE_PIN", payload: dataA.pinAdded });
+    }
+    if (loadingU !== true && dataU !== undefined) {
+      console.log(dataU);
+      dispatch({ type: "CREATE_COMMENT", payload: dataU.pinUpdated });
+    }
+    if (loadingD !== true && dataD !== undefined) {
+      console.log(dataD);
+      dispatch({ type: "DELETE_PIN", payload: dataD.pinDeleted });
+    }
+  }, [loadingA, loadingU, loadingD]);
 
   useEffect(() => {
     getPins(); // eslint-disable-next-line
@@ -81,7 +113,7 @@ const Map = ({ classes }) => {
   };
   const getPins = async () => {
     const { getPins } = await client.request(GET_PINS_QUERY);
-    console.log(getPins);
+    //console.log(getPins);
     dispatch({ type: "GET_PINS", payload: getPins });
   };
   const handleMapClick = ({ lngLat, leftButton }) => {
@@ -106,8 +138,8 @@ const Map = ({ classes }) => {
   };
   const deletePin = async (pin) => {
     const variable = { pinId: pin._id };
-    const { deletePin } = await client.request(DELETE_PIN_MUTATION, variable);
-    dispatch({ type: "DELETE_PIN", payload: deletePin });
+    await client.request(DELETE_PIN_MUTATION, variable);
+    //dispatch({ type: "DELETE_PIN", payload: deletePin });
     setPopUp(null);
   };
   const isAuthUser = () => state.currentUser._id === popup.author._id;
@@ -204,7 +236,6 @@ const Map = ({ classes }) => {
             </Popup>
           )}
         </ReactMapGL>
-
         {/**Blog Area */}
         <Blog />
       </div>
