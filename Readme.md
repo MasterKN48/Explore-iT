@@ -1,10 +1,10 @@
-### 								Explore-iT : Map Based Real Time Micro Blogging App
+### Explore-iT : Map Based Real Time Micro Blogging App
 
 <img src="./assets/app.png" height='84'>
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/) [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/Naereen/badges)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)]() [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)]() [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)]() [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)]()
 
-A GraphQL API  based real-time map based micro blogging app. I created this project to learn about graphql API development from scratch, this project includes all major aspects of graphql stack like queries, mutation, subscription, Apollo client-server pattern.
+A GraphQL API based real-time map based micro blogging app. I created this project to learn about graphql API development from scratch, this project includes all major aspects of graphql stack like queries, mutation, subscription, Apollo client-server pattern.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -12,7 +12,7 @@ A GraphQL API  based real-time map based micro blogging app. I created this proj
 
 - Sign-In/Sign-out with Google Account.
 - Mark temporary pin on map.
-- Add small blog about that pined place with picture  and add it to map as persistent.
+- Add small blog about that pined place with picture and add it to map as persistent.
 - After Added to map, all others user can see that updated pin in real time.
 - Any sign-in user can do comments on pinned places.
 - Edit/Delete any posted pinned places and comments.
@@ -21,7 +21,7 @@ A GraphQL API  based real-time map based micro blogging app. I created this proj
 
 ##### Stack:
 
-[![Generic badge](https://img.shields.io/badge/Node.js->=14-<COLOR>.svg)]()[![Generic badge](https://img.shields.io/badge/GraphQL-red.svg)]()[![Generic badge](https://img.shields.io/badge/React.js->=16-blue.svg)]() [![Generic badge](https://img.shields.io/badge/MongoDB->=4-lime.svg)]() [![Generic badge](https://img.shields.io/badge/Apollo_Server->=2-pink.svg)]()[![Generic badge](https://img.shields.io/badge/Apollo_Client->=3-yellow.svg)]()
+[![Generic badge](https://img.shields.io/badge/Node.js->=14-<COLOR>.svg)]() [![Generic badge](https://img.shields.io/badge/GraphQL-red.svg)]() [![Generic badge](https://img.shields.io/badge/React.js->=16-blue.svg)]() [![Generic badge](https://img.shields.io/badge/MongoDB->=4-lime.svg)]() [![Generic badge](https://img.shields.io/badge/Apollo_Server->=2-pink.svg)]() [![Generic badge](https://img.shields.io/badge/Apollo_Client->=3-yellow.svg)]()
 
 ##### How to run locally?
 
