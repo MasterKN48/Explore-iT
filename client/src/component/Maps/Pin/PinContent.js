@@ -1,11 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withStyles } from "@material-ui/core/styles";
-// import Typography from "@material-ui/core/Typography";
-// import AccessTime from "@material-ui/icons/AccessTime";
-// import Face from "@material-ui/icons/Face";
+import Typography from "@material-ui/core/Typography";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import FaceIcon from "@material-ui/icons/Face";
+import context from "../../../context";
+import { format } from "date-fns";
+import Comments from "../Comment/Comments";
+import CreateComments from "../Comment/CreateComment";
 
 const PinContent = ({ classes }) => {
-  return <div>PinContent</div>;
+  const { state } = useContext(context);
+  const { title, content, author, createdAt, comments } = state.currentPin;
+  return (
+    <div className={classes.root}>
+      <Typography component="h2" variant="h4" color="primary" gutterBottom>
+        {title}
+      </Typography>
+      <Typography
+        className={classes.text}
+        component="h3"
+        variant="h6"
+        color="inherit"
+        gutterBottom
+      >
+        <FaceIcon className={classes.icons} /> {author.name}
+      </Typography>
+      <Typography
+        className={classes.text}
+        variant="subtitle2"
+        color="inherit"
+        gutterBottom
+      >
+        <AccessTimeIcon className={classes.icons} />{" "}
+        {format(Number(createdAt), "MMM Do, yyyy")}
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        {content}
+      </Typography>
+      {/* Pin Comment */}
+      <CreateComments />
+      <Comments data={comments} />
+    </div>
+  );
 };
 
 const styles = (theme) => ({
@@ -15,8 +51,8 @@ const styles = (theme) => ({
     width: "100%",
   },
   icon: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   text: {
     display: "flex",

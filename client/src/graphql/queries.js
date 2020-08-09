@@ -1,4 +1,4 @@
-const ME_QUERY = `
+export const ME_QUERY = `
 {
   me{
     _id
@@ -9,4 +9,31 @@ const ME_QUERY = `
 }
 `;
 
-export { ME_QUERY };
+export const GET_PINS_QUERY = `
+  {
+    getPins{
+      _id
+      createdAt
+      title
+      content
+      image
+      latitude
+      longitude
+      author {
+        _id
+        name 
+        email
+        picture
+      }
+      comments{
+        text
+        createdAt
+        author{
+          _id
+           name
+           picture
+        }
+      }
+    }
+  }
+`;

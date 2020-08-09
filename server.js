@@ -43,32 +43,27 @@ const { findeOrCreateUser } = require("./controllers/user");
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolver");
 
-const authentication = async (req) => {
-  let authToken = null;
-  let currentUser = null;
-  try {
-    authToken = req.headers.authorization;
-    if (authToken) {
-      //find user in DB
-      currentUser = await findeOrCreateUser(authToken);
-      // or create User
-      //console.log(currentUser);
-    }
-  } catch (error) {
-    console.log(error);
-    console.log("Unable to authenticate user with token");
-  }
-  return currentUser;
-};
-
 const server = new ApolloServer({
   typeDefs: typeDefs,
   resolvers: resolvers,
-  context: ({ req }) => ({
-    currentUser: authentication(req),
-  }),
+  context: async ({ req }) => {
+    let authToken = null;
+    let currentUser = null;
+    try {
+      authToken = req.headers.authorization;
+      if (authToken) {
+        //find user in DB
+        currentUser = await findeOrCreateUser(authToken);
+        // or create User
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Unable to authenticate user with token");
+    }
+    return { currentUser };
+  },
 });
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: "/api/graphql" });
 //!----
 
 app.get("/", (req, res) => {

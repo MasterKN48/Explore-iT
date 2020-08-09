@@ -16,14 +16,17 @@ const styles = {
     alignItems: "center",
   },
 };
-
+const ENDPOINT =
+  process.env.NODE_ENV === "prod"
+    ? "/api/graphql"
+    : "http://localhost:8000/api/graphql";
 const Login = ({ classes }) => {
   const { state, dispatch } = useContext(context);
   const onSuccess = async (googleUser) => {
     //console.log(googleUser);
     const idToken = googleUser.getAuthResponse().id_token;
     try {
-      const client = new GraphQLClient("http://localhost:8000/graphql", {
+      const client = new GraphQLClient(ENDPOINT, {
         headers: { authorization: idToken },
       });
       const { me } = await client.request(ME_QUERY);
@@ -34,9 +37,12 @@ const Login = ({ classes }) => {
       onFailure(error);
     }
   };
+
   const onFailure = (error) => {
     console.error(error);
+    dispatch({ type: "IS_LOGGED_IN", payload: false });
   };
+
   return state.isAuth ? (
     <Redirect to="/" />
   ) : (

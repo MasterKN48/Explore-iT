@@ -28,8 +28,8 @@ const verifyAuthToken = async (token) => {
 };
 const checkUserExits = async (email) => await User.findOne({ email }).exec();
 
-const newUser = (googleUser) => {
+const newUser = async (googleUser) => {
   const { name, email, picture } = googleUser;
   const user = { name, email, picture };
-  return new User(user).save();
+  return await new User(user).save();
 };
