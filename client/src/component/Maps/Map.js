@@ -81,6 +81,20 @@ const Map = ({ classes }) => {
   );
 
   useEffect(() => {
+    getUserPosition(); // eslint-disable-next-line
+  }, []);
+
+  const getUserPosition = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setViewport({ ...viewport, latitude, longitude });
+        setUserPosition({ latitude, longitude });
+      });
+    }
+  };
+
+  useEffect(() => {
     if (loadingA !== true && dataA !== undefined) {
       console.log(dataA);
       dispatch({ type: "CREATE_PIN", payload: dataA.pinAdded });
@@ -92,15 +106,11 @@ const Map = ({ classes }) => {
     if (loadingD !== true && dataD !== undefined) {
       console.log(dataD);
       dispatch({ type: "DELETE_PIN", payload: dataD.pinDeleted });
-    }
-  }, [loadingA, loadingU, loadingD]);
+    } // eslint-disable-next-line
+  }, [dataA, dataU, dataD]);
 
   useEffect(() => {
     getPins(); // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    getUserPosition(); // eslint-disable-next-line
   }, []);
 
   const [popup, setPopUp] = useState(null);
@@ -111,18 +121,9 @@ const Map = ({ classes }) => {
       popup && state.pins.findIndex((pin) => pin._id === popup._id) > -1;
     if (!pinExist) {
       setPopUp(null);
-    }
+    } // eslint-disable-next-line
   }, [state.pins.length]);
 
-  const getUserPosition = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setViewport({ ...viewport, latitude, longitude });
-        setUserPosition({ latitude, longitude });
-      });
-    }
-  };
   const getPins = async () => {
     const { getPins } = await client.request(GET_PINS_QUERY);
     //console.log(getPins);
@@ -155,6 +156,7 @@ const Map = ({ classes }) => {
     setPopUp(null);
   };
   const isAuthUser = () => state.currentUser._id === popup.author._id;
+  //console.log(userPosition);
   return (
     <div>
       <div className={mobileSize ? classes.rootMobile : classes.root}>
