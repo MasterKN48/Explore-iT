@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const http = require("http");
+const path = require("path");
+const helmet = require("helmet");
+const compression = require("compression");
 const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -21,6 +24,8 @@ mongoose
   .catch((err) => console.error(err));
 
 //* middleware
+app.use(compression());
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors("http://localhost:3000"));
@@ -38,6 +43,7 @@ if (process.env.NODE_ENV === "dev") {
     })
   );
 }
+
 const { findeOrCreateUser } = require("./controllers/user");
 
 //! GraphQL Setup
@@ -67,17 +73,25 @@ const server = new ApolloServer({
       return { currentUser };
     }
   },
+  playground: process.env.NODE_ENV === "dev" ? true : false,
 });
+
 server.applyMiddleware({
   app,
   path: "/api/graphql",
 });
+
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 //!----
 
 app.get("/", (req, res) => {
   return res.send("Hello");
+});
+
+app.use(express.static("client/build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
 httpServer.listen(process.env.PORT, () => {

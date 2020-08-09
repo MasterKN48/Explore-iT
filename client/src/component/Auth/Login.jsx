@@ -16,10 +16,8 @@ const styles = {
     alignItems: "center",
   },
 };
-const ENDPOINT =
-  process.env.NODE_ENV === "prod"
-    ? "/api/graphql"
-    : "http://localhost:8000/api/graphql";
+const ENDPOINT = "/api/graphql";
+
 const Login = ({ classes }) => {
   const { state, dispatch } = useContext(context);
   const onSuccess = async (googleUser) => {

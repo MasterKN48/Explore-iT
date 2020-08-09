@@ -11,8 +11,13 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 const Home = lazy(() => import("./component/Home"));
 const Login = lazy(() => import("./component/Auth/Login"));
 
+let url =
+  window.location.hostname === "localhost"
+    ? "ws://localhost:8000/graphql"
+    : `wss://${window.location.hostname}/graphql`;
+
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:8000/graphql",
+  uri: url,
   options: {
     reconnect: true,
   },
