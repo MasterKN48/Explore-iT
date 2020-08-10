@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const path = require("path");
-const helmet = require("helmet");
 const compression = require("compression");
 const cors = require("cors");
 const logger = require("morgan");
@@ -25,10 +24,9 @@ mongoose
 
 //* middleware
 app.use(compression());
-app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors("http://localhost:3000"));
+app.use(cors("https://explore-itb.herokuapp.com"));
 
 //? setup the logger
 if (process.env.NODE_ENV === "dev") {
