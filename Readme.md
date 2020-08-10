@@ -36,9 +36,14 @@ CLIENT_ID=<Google-OAuth-Client-Id>
 CLIENT_SECRET=<Google-OAuth-Secret>
 # edit client/src/component/Auth/Login
 # Change clientId=<Google-OAuth-Client-Id>
+# edit client/src/componenet/Maps/Pin/CreatePin ->
+#  <CLOUDINARY_API_URL>
+#  <CLOUD_NAME> in same file
 # in client dir
 npm start
 # in root project dir
+# in server.js edit cors(<Your_Domain_Name>)
+# then start server
 npm start dev
 
 ```

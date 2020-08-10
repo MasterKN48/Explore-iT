@@ -26,7 +26,7 @@ mongoose
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors("https://explore-itb.herokuapp.com"));
+app.use(cors("<your-domain-name>")); // allow only your domain name to do request
 
 //? setup the logger
 if (process.env.NODE_ENV === "dev") {
