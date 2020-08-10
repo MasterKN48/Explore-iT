@@ -26,8 +26,7 @@ import {
   PIN_UPDATED_SUBSCRIPTION,
 } from "../../graphql/subscription";
 
-const TOKEN =
-  "pk.eyJ1IjoicmFqZXNoc2l0aSIsImEiOiJja2RsdjYwOWsxMjd5MzNzOG85cXJidHl0In0.MfdbVSghtrLU7vsgPY5m6A";
+const TOKEN = "MAPBOX API TOKEN";
 const geolocateStyle = {
   position: "absolute",
   top: 0,

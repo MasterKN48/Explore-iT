@@ -26,11 +26,8 @@ const CreatePin = ({ classes }) => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "geopins");
-    data.append("cloud_name", "dakgnsolg");
-    const res = await axios.post(
-      "https://api.cloudinary.com/v1_1/dakgnsolg/image/upload",
-      data
-    );
+    data.append("cloud_name", "<CLOUD_NAME>");
+    const res = await axios.post("<CLOUDINARY_API_URL>", data);
     return res.data.url;
   };
   const handleSubmit = async (e) => {
