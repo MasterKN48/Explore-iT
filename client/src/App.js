@@ -7,6 +7,7 @@ import reducer from "./reducer";
 import PrivateRoute from "./component/Auth/PrivateRoute";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
+import NotFound from "./assets/404.webp";
 
 const Home = lazy(() => import("./component/Home"));
 const Login = lazy(() => import("./component/Auth/Login"));
@@ -28,6 +29,18 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const NoMatchPage = () => {
+  return (
+    <div className="container-fluid" align="center">
+      <img loading="lazy" style={{ height: "80vh" }} src={NotFound} alt="404" />
+      <h5>
+        The page you are looking for does not exist, <a href="/">click here</a>{" "}
+        to go to the homepage.
+      </h5>
+    </div>
+  );
+};
+
 const App = () => {
   const initialState = useContext(context);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -40,6 +53,7 @@ const App = () => {
             <Suspense fallback={<CircularProgress color="primary" />}>
               <PrivateRoute exact path="/" component={Home} />
               <Route path="/login" component={Login} />
+              <Route component={NoMatchPage} />
             </Suspense>
           </Switch>
         </context.Provider>
