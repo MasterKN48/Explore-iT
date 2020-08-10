@@ -6,7 +6,7 @@
 
 A GraphQL API based real-time map based micro blogging app. I created this project to learn about graphql API development from scratch, this project includes all major aspects of graphql stack like queries, mutation, subscription, Apollo client-server pattern.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://explore-itb.herokuapp.com")
 
 #### What this app do?
 

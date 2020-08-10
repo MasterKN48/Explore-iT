@@ -31,16 +31,17 @@ app.use(cors("https://explore-itb.herokuapp.com"));
 //? setup the logger
 if (process.env.NODE_ENV === "dev") {
   app.use(logger("dev"));
-} else {
-  const fs = require("fs");
-  app.use(
-    logger("combined", {
-      stream: fs.createWriteStream(path.join(__dirname, "access.log"), {
-        flags: "a",
-      }),
-    })
-  );
 }
+// else {
+//   const fs = require("fs");
+//   app.use(
+//     logger("combined", {
+//       stream: fs.createWriteStream(path.join(__dirname, "access.log"), {
+//         flags: "a",
+//       }),
+//     })
+//   );
+// }
 
 const { findeOrCreateUser } = require("./controllers/user");
 
