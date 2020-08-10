@@ -27,7 +27,7 @@ import {
 } from "../../graphql/subscription";
 
 const TOKEN =
-  "pk.eyJ1IjoicmFqZXNoc2l0aSIsImEiOiJja2RsdjYwOWsxMjd5MzNzOG85cXJidHl0In0.MfdbVSghtrLU7vsgPY5m6A";
+  "<MAP_BOX_TOKEN>"
 const geolocateStyle = {
   position: "absolute",
   top: 0,
