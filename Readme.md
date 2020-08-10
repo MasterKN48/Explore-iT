@@ -6,7 +6,7 @@
 
 A GraphQL API based real-time map based micro blogging app. I created this project to learn about graphql API development from scratch, this project includes all major aspects of graphql stack like queries, mutation, subscription, Apollo client-server pattern.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://explore-itb.herokuapp.com")
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://explore-itb.herokuapp.com)
 
 #### What this app do?
 
@@ -39,6 +39,8 @@ CLIENT_SECRET=<Google-OAuth-Secret>
 # edit client/src/componenet/Maps/Pin/CreatePin ->
 #  <CLOUDINARY_API_URL>
 #  <CLOUD_NAME> in same file
+# edit client/src/componenet/Maps/Map ->
+# change Token varibale to MAPBOX API TOKEN
 # in client dir
 npm start
 # in root project dir

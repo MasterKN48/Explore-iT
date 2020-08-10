@@ -49,13 +49,13 @@ const App = () => {
     <Router>
       <ApolloProvider client={client}>
         <context.Provider value={{ state, dispatch }}>
-          <Switch>
-            <Suspense fallback={<CircularProgress color="primary" />}>
+          <Suspense fallback={<CircularProgress color="primary" />}>
+            <Switch>
               <PrivateRoute exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route component={NoMatchPage} />
-            </Suspense>
-          </Switch>
+            </Switch>
+          </Suspense>
         </context.Provider>
       </ApolloProvider>
     </Router>

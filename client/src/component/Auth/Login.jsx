@@ -65,7 +65,7 @@ const Login = ({ classes }) => {
         isSignedIn={true}
         theme="dark"
         buttonText="Login with Google"
-        clientId="<GOOGLE_OAUTH_CLIENT_ID>"
+        clientId="898358244189-u1u17oj0uatlj4m15mernlngvkm2q8df.apps.googleusercontent.com"
       />
     </div>
   );
